@@ -4,8 +4,13 @@ interface PostList {
 }
 
 const PostList = async () => {
-  const response = await fetch("https://jsonplaceholder.typicode.com/posts");
+  const response = await fetch("https://jsonplaceholder.typicode.com/posts", {
+    next: {
+      revalidate: 5, // per second
+    },
+  });
   const data: PostList[] = await response.json();
+
   return (
     <div className="p-2">
       <ul>
